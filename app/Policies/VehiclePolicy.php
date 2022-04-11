@@ -18,7 +18,7 @@ class VehiclePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class VehiclePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -53,7 +53,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle)
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -65,7 +65,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle)
     {
-        //
+        return $user->role == 'admin' && !$vehicle->travels()->exists();
     }
 
     /**

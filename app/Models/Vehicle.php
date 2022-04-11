@@ -10,6 +10,8 @@ class Vehicle extends Model
 {
     use HasFactory;
 
+    public static array $types = ['truck', 'tractor', 'trailer', 'other'];
+
     public function travels(): HasMany {
         return $this->hasMany(Travel::class);
     }

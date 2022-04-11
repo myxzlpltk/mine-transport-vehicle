@@ -14,15 +14,21 @@
             <form action="{{ route('drivers.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Nama Driver <x-required/></label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Budi Santoso" required>
+                    <label for="name">Nama Driver
+                        <x-required/>
+                    </label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
+                           value="{{ old('name') }}" placeholder="Budi Santoso" required>
                     @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="age">Umur Driver <x-required/></label>
-                    <input type="number" class="form-control @error('age') is-invalid @enderror" name="age" id="age" value="{{ old('age') }}" placeholder="25" min="18" step="1" required>
+                    <label for="age">Umur Driver
+                        <x-required/>
+                    </label>
+                    <input type="number" class="form-control @error('age') is-invalid @enderror" name="age" id="age"
+                           value="{{ old('age') }}" placeholder="25" min="18" step="1" required>
                     @error('age')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

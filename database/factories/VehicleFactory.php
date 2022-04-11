@@ -19,7 +19,7 @@ class VehicleFactory extends Factory
         $this->faker->addProvider(new \Faker\Provider\Fakecar($this->faker));
 
         return [
-            'vehicle_type' => 'truck',
+            'type' => 'truck',
             'model'=> $this->faker->vehicleModel,
             'brand' => $this->faker->vehicleBrand,
             'color' => $this->faker->colorName,

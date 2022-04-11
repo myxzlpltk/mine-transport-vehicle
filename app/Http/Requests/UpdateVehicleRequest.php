@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Vehicle;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateVehicleRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UpdateVehicleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,12 @@ class UpdateVehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'type' => ['required', 'string', Rule::in(Vehicle::$types)],
+            'model' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+            'year' => 'required|date_format:Y|before:today',
+            'plate' => 'required|string|max:255',
         ];
     }
 }
