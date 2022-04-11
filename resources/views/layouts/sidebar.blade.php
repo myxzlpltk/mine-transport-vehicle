@@ -15,8 +15,6 @@
         </a>
     </li>
 
-    <hr class="sidebar-divider my-0">
-
     @can('view-any', \App\Models\Driver::class)
         <li class="nav-item @if(Route::is('drivers.*')) active @endif">
             <a class="nav-link" href="{{ route('drivers.index') }}">
