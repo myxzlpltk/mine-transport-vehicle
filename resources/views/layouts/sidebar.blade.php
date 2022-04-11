@@ -15,14 +15,14 @@
     </a>
   </li>
 
-  {{--<hr class="sidebar-divider my-0">
+  <hr class="sidebar-divider my-0">
 
-  <li class="nav-item @if(Route::is('vechicles.*')) active @endif">
-    <a class="nav-link" href="{{ route('vechicles.index') }}">
-      <i class="fas fa-fw fa-truck"></i>
-      <span>Data Kendaraan</span>
+  <li class="nav-item @if(Route::is('drivers.*')) active @endif">
+    <a class="nav-link" href="{{ route('drivers.index') }}">
+      <i class="fas fa-fw fa-users"></i>
+      <span>Data Driver</span>
     </a>
-  </li>--}}
+  </li>
 
   <hr class="sidebar-divider d-none d-md-block">
 

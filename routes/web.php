@@ -20,4 +20,6 @@ Route::redirect('/', '/dashboard');
 Route::middleware('auth')->group(function (){
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profil', [ProfileController::class, 'index'])->name('profile');
+
+    Route::resource('drivers', DriverController::class);
 });

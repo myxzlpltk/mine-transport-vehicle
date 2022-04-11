@@ -6,15 +6,14 @@ use App\Models\Travel;
 use App\Http\Requests\StoreTravelRequest;
 use App\Http\Requests\UpdateTravelRequest;
 
-class TravelController extends Controller
-{
+class TravelController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -23,64 +22,58 @@ class TravelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTravelRequest  $request
+     * @param \App\Http\Requests\StoreTravelRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTravelRequest $request)
-    {
+    public function store(StoreTravelRequest $request) {
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Travel  $travel
+     * @param \App\Models\Travel $travel
      * @return \Illuminate\Http\Response
      */
-    public function show(Travel $travel)
-    {
+    public function show(Travel $travel) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Travel  $travel
+     * @param \App\Models\Travel $travel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Travel $travel)
-    {
+    public function edit(Travel $travel) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTravelRequest  $request
-     * @param  \App\Models\Travel  $travel
+     * @param \App\Http\Requests\UpdateTravelRequest $request
+     * @param \App\Models\Travel $travel
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTravelRequest $request, Travel $travel)
-    {
+    public function update(UpdateTravelRequest $request, Travel $travel) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Travel  $travel
+     * @param \App\Models\Travel $travel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Travel $travel)
-    {
+    public function destroy(Travel $travel) {
         //
     }
 }
