@@ -3,7 +3,7 @@
     <div class="sidebar-brand-icon">
       <i class="fab fa-laravel"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SIMPEL</div>
+    <div class="sidebar-brand-text mx-3">Vehicle</div>
   </a>
 
   <hr class="sidebar-divider my-0">

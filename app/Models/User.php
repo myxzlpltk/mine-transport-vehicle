@@ -9,8 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -49,5 +48,13 @@ class User extends Authenticatable
 
     public function validatorTravels(): HasMany {
         return $this->hasMany(Travel::class, 'validator_id');
+    }
+
+    public function travels(): HasMany {
+        if ($this->role == 'admin') {
+            return $this->hasMany(Travel::class, 'creator_id');
+        } else {
+            return $this->hasMany(Travel::class);
+        }
     }
 }
