@@ -77,7 +77,8 @@
         <div class="col-md-8">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Grafik Pemakaian Kendaraan 30 Hari Terakhir</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Grafik Pemakaian Kendaraan
+                        Bulan {{ now()->translatedFormat('F Y') }}</h6>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
@@ -87,4 +88,39 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('scripts')
+    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            window.stokChart = new Chart(document.getElementById('usage-chart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: {!! $travels->pluck('label')->toJson() !!},
+                    datasets: [
+                        {
+                            label: 'Jumlah Perjalanan',
+                            backgroundColor: 'rgb(75, 192, 192, 0.2)',
+                            borderColor: 'rgb(75, 192, 192)',
+                            data: {!! $travels->pluck('data')->toJson() !!},
+                            pointHitRadius: 10,
+                        },
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                callback: (value) => (value % 1 === 0) ? value : null
+                            }
+                        }]
+                    },
+                }
+            });
+        });
+    </script>
 @endsection
