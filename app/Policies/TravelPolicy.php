@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\TravelStatus;
 use App\Models\Travel;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -18,7 +19,7 @@ class TravelPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +31,7 @@ class TravelPolicy
      */
     public function view(User $user, Travel $travel)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +42,7 @@ class TravelPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -53,7 +54,7 @@ class TravelPolicy
      */
     public function update(User $user, Travel $travel)
     {
-        //
+        return $user->role == 'validator';
     }
 
     /**
@@ -65,7 +66,9 @@ class TravelPolicy
      */
     public function delete(User $user, Travel $travel)
     {
-        //
+        return $user->role == 'admin'
+            && $travel->creator_id == $user->id
+            && $travel->status == TravelStatus::Pending;
     }
 
     /**

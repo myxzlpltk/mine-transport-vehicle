@@ -58,5 +58,53 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-8">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Kendaraan</th>
+                                <th>Waktu</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($travels as $travel)
+                                <tr>
+                                    <td>{{ $travels->firstItem() + $loop->index }}</td>
+                                    <td>
+                                        <a href="{{ route('vehicles.show', $travel->vehicle) }}">{{ $travel->vehicle?->brand }} {{ $travel->vehicle?->model }}
+                                            ({{ $travel->vehicle?->color }})</a>
+                                    </td>
+                                    <td>{{ $travel->started_at->translatedFormat('d/m/Y h:i') }}
+                                        - {{ $travel->ended_at->translatedFormat('d/m/Y h:i') }}</td>
+                                    <td>
+                                <span
+                                    class="badge {{ $travel->status == \App\Enums\TravelStatus::Pending ? 'badge-primary' : ($travel->status == \App\Enums\TravelStatus::Validated ? 'badge-success' : 'badge-danger') }}">{{ strtoupper($travel->status->getValue()) }}</span>
+                                    </td>
+                                    <td>
+                                        @can('view', $travel)
+                                            <a href="{{ route('travels.show', $travel) }}"
+                                               class="btn btn-primary btn-sm">Lihat</a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">Data Kosong</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{ $travels->links() }}
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

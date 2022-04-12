@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $vehicle->name)
+@section('title', $vehicle->brand." ".$vehicle->model)
 
 @section('actions')
     @can('update', $vehicle)
@@ -29,7 +29,7 @@
                 <div class="card-header">
                     <h6 class="m-0 font-weight-bold text-primary">
                         <i class="fa fa-info-circle fa-fw"></i>
-                        <span>Informasi Driver</span>
+                        <span>Informasi Kendaraan</span>
                     </h6>
                 </div>
                 <div class="card-body">
@@ -71,6 +71,53 @@
                             <td>{{ $vehicle->updated_at->translatedFormat('d F Y h:i') }}</td>
                         </tr>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Driver</th>
+                                <th>Waktu</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($travels as $travel)
+                                <tr>
+                                    <td>{{ $travels->firstItem() + $loop->index }}</td>
+                                    <td>
+                                        <a href="{{ route('drivers.show', $travel->driver) }}">{{ $travel->driver?->name }}</a>
+                                    </td>
+                                    <td>{{ $travel->started_at->translatedFormat('d/m/Y h:i') }}
+                                        - {{ $travel->ended_at->translatedFormat('d/m/Y h:i') }}</td>
+                                    <td>
+                                <span
+                                    class="badge {{ $travel->status == \App\Enums\TravelStatus::Pending ? 'badge-primary' : ($travel->status == \App\Enums\TravelStatus::Validated ? 'badge-success' : 'badge-danger') }}">{{ strtoupper($travel->status->getValue()) }}</span>
+                                    </td>
+                                    <td>
+                                        @can('view', $travel)
+                                            <a href="{{ route('travels.show', $travel) }}"
+                                               class="btn btn-primary btn-sm">Lihat</a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">Data Kosong</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{ $travels->links() }}
                 </div>
             </div>
         </div>

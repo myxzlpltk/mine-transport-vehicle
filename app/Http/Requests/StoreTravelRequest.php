@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\TravelNotConflict;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTravelRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreTravelRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,10 @@ class StoreTravelRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'driver_id' => 'required|exists:drivers,id',
+            'vehicle_id' => 'required|exists:vehicles,id',
+            'started_at' => ['required', 'date', 'after:today', new TravelNotConflict],
+            'ended_at' => ['required', 'date', 'after:today', 'after:started_at'],
         ];
     }
 }

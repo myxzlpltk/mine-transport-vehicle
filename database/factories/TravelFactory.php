@@ -20,8 +20,8 @@ class TravelFactory extends Factory
         $startedAt = $this->faker->dateTimeThisMonth;
 
         return [
-            'vehicle_id' => $this->faker->numberBetween(1, 10),
-            'driver_id' => $this->faker->numberBetween(1, 10),
+            'vehicle_id' => $this->faker->numberBetween(1, 25),
+            'driver_id' => $this->faker->numberBetween(1, 25),
             'creator_id' => 1,
             'validator_id' => $isValidated ? 2 : null,
             'validated_at' => $isValidated ? $this->faker->dateTimeThisMonth : null,

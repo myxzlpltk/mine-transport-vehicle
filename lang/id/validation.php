@@ -147,5 +147,17 @@ return [
     */
 
     'attributes' => [
+        'driver_id' => 'Driver',
+        'vehicle_id' => 'Kendaraan',
+        'started_at' => 'Waktu Mulai',
+        'ended_at' => 'Waktu Selesai',
+        'type' => 'Jenis',
+        'brand' => 'Merek',
+        'model' => 'Model',
+        'color' => 'Warna',
+        'year' => 'Tahun',
+        'plate' => 'Nomor Polisi',
+        'name' => 'Nama',
+        'age' => 'Umur',
     ],
 ];

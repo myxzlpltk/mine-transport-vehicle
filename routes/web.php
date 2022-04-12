@@ -20,6 +20,7 @@ Route::redirect('/', '/dashboard');
 Route::middleware('auth')->group(function (){
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::resource('travels', TravelController::class);
     Route::resource('drivers', DriverController::class);
     Route::resource('vehicles', VehicleController::class);
 });

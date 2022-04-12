@@ -70,6 +70,7 @@ class DriverController extends Controller {
         return view('drivers.view', [
             'driver' => $driver->loadCount('travels'),
             'travels' => $driver->travels()
+                ->with('vehicle')
                 ->orderBy('started_at', 'desc')
                 ->orderBy('ended_at', 'desc')
                 ->paginate(10)

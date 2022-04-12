@@ -15,6 +15,15 @@
         </a>
     </li>
 
+    @can('view-any', \App\Models\Travel::class)
+        <li class="nav-item @if(Route::is('travels.*')) active @endif">
+            <a class="nav-link" href="{{ route('travels.index') }}">
+                <i class="fas fa-fw fa-route"></i>
+                <span>Data Perjalanan</span>
+            </a>
+        </li>
+    @endcan
+
     @can('view-any', \App\Models\Driver::class)
         <li class="nav-item @if(Route::is('drivers.*')) active @endif">
             <a class="nav-link" href="{{ route('drivers.index') }}">
