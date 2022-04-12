@@ -40,8 +40,8 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save fa-fw"></i>
-                    <span>Simpan</span>
+                    <i class="fa fa-file-export fa-fw"></i>
+                    <span>Export</span>
                 </button>
             </form>
         </div>
