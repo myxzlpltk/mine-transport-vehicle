@@ -20,7 +20,10 @@ Route::redirect('/', '/dashboard');
 Route::middleware('auth')->group(function (){
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('travels/exports', [TravelController::class, 'export'])->name('travels.export');
+    Route::post('travels/exports', [TravelController::class, 'download']);
     Route::resource('travels', TravelController::class);
+
     Route::resource('drivers', DriverController::class);
     Route::resource('vehicles', VehicleController::class);
 });

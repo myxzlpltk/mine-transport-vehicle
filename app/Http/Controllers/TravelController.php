@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TravelStatus;
+use App\Exports\TravelExport;
 use App\Models\Driver;
 use App\Models\Travel;
 use App\Http\Requests\StoreTravelRequest;
 use App\Http\Requests\UpdateTravelRequest;
 use App\Models\Vehicle;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TravelController extends Controller {
 
@@ -125,5 +128,24 @@ class TravelController extends Controller {
         return redirect()
             ->route('travels.index')
             ->with('success', 'Data berhasil dihapus.');
+    }
+
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function export() {
+        $this->authorize('view-any', Travel::class);
+
+        return view('travels.export');
+    }
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function download(Request $request) {
+        $this->authorize('view-any', Travel::class);
+
+        return Excel::download(new TravelExport($request->started_at, $request->ended_at), "travels {$request->started_at}-{$request->ended_at}.xlsx");
     }
 }

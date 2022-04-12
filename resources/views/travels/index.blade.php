@@ -3,6 +3,12 @@
 @section('title', 'Data Perjalanan')
 
 @section('actions')
+    @can('view-any', \App\Models\Travel::class)
+        <a href="{{ route('travels.export') }}" class="btn btn-info btn-sm">
+            <i class="fa fa-file-export fa-fw"></i>
+            <span>Export Data</span>
+        </a>
+    @endcan
     @can('create', \App\Models\Travel::class)
         <a href="{{ route('travels.create') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus fa-fw"></i>
