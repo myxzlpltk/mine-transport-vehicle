@@ -1,3 +1,6 @@
+# Screenshots (Docs)
+Click [here](https://docs.google.com/document/d/16a93aRW2WoRJHMU7NgMioKKwFQ4SYl2p/view "here") to access
+
 # Requirements
 This project based on Laravel 9. So, this is what you need to install
 - PHP 8.1+
