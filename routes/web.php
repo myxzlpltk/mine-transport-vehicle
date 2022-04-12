@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function (){
 
     Route::get('travels/exports', [TravelController::class, 'export'])->name('travels.export');
     Route::post('travels/exports', [TravelController::class, 'download']);
+    Route::patch('travels/{travel}/accept', [TravelController::class, 'accept'])->name('travels.accept');
+    Route::patch('travels/{travel}/reject', [TravelController::class, 'reject'])->name('travels.reject');
     Route::resource('travels', TravelController::class);
 
     Route::resource('drivers', DriverController::class);

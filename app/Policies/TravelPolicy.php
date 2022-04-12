@@ -54,7 +54,7 @@ class TravelPolicy
      */
     public function update(User $user, Travel $travel)
     {
-        return $user->role == 'validator';
+        return $user->role == 'validator' && $travel->status == TravelStatus::Pending;;
     }
 
     /**

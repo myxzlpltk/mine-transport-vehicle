@@ -87,6 +87,72 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Permintaan Pending</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Kendaraan</th>
+                                <th>Driver</th>
+                                <th>Waktu Perjalanan</th>
+                                <th>Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($pending_reviews as $travel)
+                                <tr>
+                                    <td>{{ $pending_reviews->firstItem() + $loop->index }}</td>
+                                    <td>
+                                        <a href="{{ route('vehicles.show', $travel->vehicle) }}">{{ $travel->vehicle?->brand }} {{ $travel->vehicle?->model }}
+                                            ({{ $travel->vehicle?->color }})</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('drivers.show', $travel->driver) }}">{{ $travel->driver?->name }}</a>
+                                    </td>
+                                    <td>{{ $travel->started_at->translatedFormat('d/m/Y h:i') }}
+                                        - {{ $travel->ended_at->translatedFormat('d/m/Y h:i') }}</td>
+                                    <td>
+                                        @can('update', $travel)
+                                            <form action="{{ route('travels.accept', $travel) }}" onsubmit="return confirm('Apakah anda yakin?')"
+                                                  method="POST" class="d-inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <i class="fa fa-check fa-fw"></i>
+                                                    <span>Terima</span>
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('travels.reject', $travel) }}" onsubmit="return confirm('Apakah anda yakin?')"
+                                                  method="POST" class="d-inline-block">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-ban fa-fw"></i>
+                                                    <span>Terima</span>
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">Data Kosong</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {{ $pending_reviews->links() }}
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 

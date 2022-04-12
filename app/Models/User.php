@@ -50,11 +50,11 @@ class User extends Authenticatable {
         return $this->hasMany(Travel::class, 'validator_id');
     }
 
-    public function travels(): HasMany {
+    public function travels(): \Illuminate\Database\Eloquent\Builder|HasMany {
         if ($this->role == 'admin') {
             return $this->hasMany(Travel::class, 'creator_id');
         } else {
-            return $this->hasMany(Travel::class);
+            return Travel::query();
         }
     }
 }

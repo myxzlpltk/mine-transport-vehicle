@@ -16,7 +16,7 @@ class TravelFactory extends Factory
      */
     public function definition()
     {
-        $isValidated = $this->faker->boolean(25);
+        $isValidated = $this->faker->boolean(80);
         $startedAt = $this->faker->dateTimeThisMonth;
 
         return [

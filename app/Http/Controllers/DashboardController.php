@@ -21,10 +21,15 @@ class DashboardController extends Controller {
             'total_travels' => Travel::query()->where('status', TravelStatus::Validated)->count(),
             'total_pending_requests' => $request->user()->travels()->where('status', TravelStatus::Pending)->count(),
             'travels' => $this->stats(Travel::query()),
+            'pending_reviews' => $request->user()->role != 'validator' ? null : Travel::query()
+                ->with(['driver', 'vehicle'])
+                ->where('status', TravelStatus::Pending)
+                ->orderBy('started_at')
+                ->paginate(10)
         ]);
     }
 
-    private function stats(Builder $query){
+    private function stats(Builder $query) {
         $data = $query
             ->select(
                 DB::raw('count(id) as count'),
@@ -37,7 +42,7 @@ class DashboardController extends Controller {
             ->get();
 
         $stats = new Collection();
-        for($i=1; $i<=31; $i++){
+        for ($i = 1; $i <= 31; $i++) {
             $stats->push((object)[
                 'key' => $i,
                 'label' => $i,
@@ -45,7 +50,7 @@ class DashboardController extends Controller {
             ]);
         }
 
-        foreach($data as $item){
+        foreach ($data as $item) {
             $stats
                 ->firstWhere('key', '=', $item->dayKey)
                 ->data = intval($item->count);

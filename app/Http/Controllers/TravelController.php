@@ -148,4 +148,33 @@ class TravelController extends Controller {
 
         return Excel::download(new TravelExport($request->started_at, $request->ended_at), "travels {$request->started_at}-{$request->ended_at}.xlsx");
     }
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function accept(Travel $travel) {
+        $this->authorize('update', $travel);
+
+        $travel->status = TravelStatus::Validated;
+        $travel->validated_at = now();
+        $travel->save();
+
+        return redirect()
+            ->route('dashboard')
+            ->with('success', 'Perjalanan berhasil disetujui.');
+    }
+
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function reject(Travel $travel) {
+        $this->authorize('update', $travel);
+
+        $travel->status = TravelStatus::Rejected;
+        $travel->save();
+
+        return redirect()
+            ->route('dashboard')
+            ->with('success', 'Perjalanan berhasil ditolak.');
+    }
 }
