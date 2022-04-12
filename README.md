@@ -62,4 +62,4 @@ php artisan serve
 You can now access the server at http://localhost:8000
 
 # Data Model
-![Data Model](data model.png)
+![Data Model](data-model.png)
