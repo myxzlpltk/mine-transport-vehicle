@@ -34,7 +34,7 @@ class TravelNotConflict implements Rule, DataAwareRule {
     public function passes($attribute, $value) {
         $started_at = $this->data['started_at'];
         $ended_at = $this->data['ended_at'];
-        $date_query = "(started_at BETWEEN '$started_at' AND '$ended_at') OR (ended_at BETWEEN '$started_at' AND '$ended_at')";
+        $date_query = "((started_at BETWEEN '$started_at' AND '$ended_at') OR (ended_at BETWEEN '$started_at' AND '$ended_at'))";
 
         // Check if correlated driver is already assigned to another travel
         $travel_driver = Travel::query()
